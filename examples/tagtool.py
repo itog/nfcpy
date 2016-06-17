@@ -320,6 +320,10 @@ class TagTool(CommandLineInterface):
 
     def show_tag(self, tag):
         print(tag)
+
+        f = open('/var/tmp/nfc.log', 'w')
+        f.write(str(tag))
+        f.close()
         
         if tag.ndef:
             print("NDEF Capabilities:")
