@@ -68,7 +68,7 @@ def main(args):
             while True:
                 target = clf.sense(*targets, iterations=args.iterations,
                                    interval=args.interval)
-                print("{0} {1}".format(time.strftime("%X"), target))
+                print(target)
                 
                 if (target and args.atr and target.brty in brty_for_dep and
                     ((target.sel_res and target.sel_res[0] & 0x40) or
@@ -117,7 +117,8 @@ def main(args):
                     try: clf.exchange(request_system_code, timeout=1.0)
                     except nfc.clf.CommunicationError as error:
                         print(repr(error) + " for Request System Code Command")
-                
+                sys.stdout.flush()
+                sys.stderr.flush()
                 if not args.repeat: break
                 time.sleep(args.waittime)
         except IOError as error:
